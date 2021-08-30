@@ -14,13 +14,13 @@ displayList = () =>  {
 }
 
 getTitle = restaurant => {
-        console.log(restaurant);
         const {title, url} = restaurant;
         this.setState({title, url, display: false})
 }
 
 goToRestaurant = () => {
-        console.log('go to rest')
+        const { url } = this.state;
+        this.props.history.push(`/restaurant/${url}`)
 }
 
     render() {
