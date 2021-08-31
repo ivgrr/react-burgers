@@ -29,8 +29,8 @@ class AddBurgerForm extends React.Component {
                 <input ref={this.nameRef} name='name' type='text' placeholder='Name' autoComplete='off'/>
                 <input ref={this.priceRef} name='price' type='text' placeholder='Price' autoComplete='off'/>
                 <select ref={this.statusRef} name="status" className='status'>
-                    <option value="avalible">Доступно</option>
-                    <option value="unavalible">Недоступно</option>
+                    <option value="available">Доступно</option>
+                    <option value="unavailable">Недоступно</option>
                 </select>
                 <textarea ref={this.descRef} name='desc'placeholder='Desc'/>
                 <input ref={this.imageRef} name='image' type='text' placeholder='Image' autoComplete='off'/>
