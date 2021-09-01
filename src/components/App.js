@@ -46,6 +46,15 @@ class App extends React.Component {
         this.setState({ burgers });
     };
 
+    updateBurger = (key, updateBurger) => {
+        // Делаем копию объекта state
+        const burgers = { ...this.state.burgers};
+        // Обновляем нужный бургер
+        burgers[key] = updateBurger;
+        // Записать наш новый объект burgers в state
+        this.setState({burgers});
+
+    };
     loadSampleBurgers = () => {
         this.setState({burgers: sampleBurgers});
     };
@@ -76,7 +85,10 @@ class App extends React.Component {
                 </div>
                 <Order burgers={this.state.burgers} order={this.state.order}/>
                 <MenuAdmin addBurger = {this.addBurger}
-                           loadSampleBurgers={this.loadSampleBurgers}/>
+                           loadSampleBurgers={this.loadSampleBurgers}
+                           burgers={this.state.burgers}
+                           updateBurger={this.updateBurger}
+                />
             </div>
         );
     };
