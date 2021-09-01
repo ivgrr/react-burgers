@@ -8,6 +8,8 @@ class Order extends React.Component {
         const count = this.props.order[key];
 
         const isAvailable = burger && burger.status === 'available';
+// если бургеры с базы данных еще не подгзузились, то вернем null чтоб не писало что бургер недоступен
+        if (!burger) return null;
         if (!isAvailable) {
             return (
                 <li className='unavailable' key={key}>
