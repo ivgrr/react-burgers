@@ -30,11 +30,10 @@ class App extends React.Component {
     componentDidUpdate(prevProps, prevState, snapshot) {
         const {params} = this.props.match;
         localStorage.setItem(params.restaurantId, JSON.stringify(this.state.order));
-    }
+    };
 
     componentWillUnmount() {
-
-        base.removeBinding(this.ref)
+        base.removeBinding(this.ref);
     };
 
     addBurger = burger => {
@@ -53,19 +52,39 @@ class App extends React.Component {
         burgers[key] = updateBurger;
         // Записать наш новый объект burgers в state
         this.setState({burgers});
-
     };
+
+    deleteBurger = key => {
+        // Делаем копию объекта state
+        const burgers = {...this.state.burgers};
+        // Удаляем бургер
+        burgers[key] = null;
+        // Записать наш новый объект в state
+        this.setState({burgers});
+    };
+
     loadSampleBurgers = () => {
         this.setState({burgers: sampleBurgers});
     };
 
     addToOrder = (key) => {
         // Делаем копию объекта state
-        const order = {...this.state.order}
+        const order = {...this.state.order};
         // Добавить ключ к заказу со значением 1, либо обновить текущее значение
-        order[key] = order[key] + 1 || 1
+        order[key] = order[key] + 1 || 1;
         // Записываем обновленное значение order в объект state
+        this.setState({order});
+    };
+
+    deleteFromOrder = key => {
+        // Делаем копию объекта state
+        const order = {...this.state.order};
+        // Удаляем бургер
+        delete order[key];
+        // Записываем обновленное значение order в state
         this.setState({order})
+
+
     }
 
     render() {
@@ -83,11 +102,12 @@ class App extends React.Component {
                         })}
                     </ul>
                 </div>
-                <Order burgers={this.state.burgers} order={this.state.order}/>
+                <Order deleteFromOrder = {this.deleteFromOrder} burgers={this.state.burgers} order={this.state.order}/>
                 <MenuAdmin addBurger = {this.addBurger}
                            loadSampleBurgers={this.loadSampleBurgers}
                            burgers={this.state.burgers}
                            updateBurger={this.updateBurger}
+                           deleteBurger={this.deleteBurger}
                 />
             </div>
         );
